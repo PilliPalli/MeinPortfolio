@@ -1,7 +1,36 @@
 ﻿@page "/"
+@using MeinPortfolio.Components
+@using MeinPortfolio.Services
+@using MeinPortfolio.Models
 
-<PageTitle>Home</PageTitle>
 
-<h1>Hello, world!</h1>
+<div class="terminal">
+    <div class="terminal-header">
+        <div>Terminal Portfolio - @NavigationService.GetSectionPath()</div>
 
-Welcome to your new app.
+    </div>
+    <div class="terminal-body" id="terminal-body">
+        @foreach (var line in output)
+        {
+            if (line.IsHtml)
+            {
+                <div>@((MarkupString)line.Content)</div>
+            }
+            else
+            {
+                <div>@line.Content</div>
+            }
+        }
+
+        @if (showContactForm)
+        {
+            <ContactForm />
+        }
+
+
+    </div>
+    <div class="terminal-input">
+        <span>$ </span>
+        <input @bind="input" @bind:event="oninput" @onkeydown="HandleKeyPress" @ref="inputElement" autofocus />
+    </div>
+</div>
