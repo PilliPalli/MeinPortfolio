@@ -1,13 +1,26 @@
+:root {
+    --terminal-bg: #121212;
+    --terminal-text: #33ff33;
+    --terminal-border: #33ff33;
+    --terminal-header-bg: #121212;
+    --terminal-header-text: #33ff33;
+    --body-bg: #121212;
+    --error-color: #ff5555;
+    --success-color: #55ff55;
+    --link-color: #5555ff;
+    --highlight-color: #ffff55;
+}
+
 .valid.modified:not([type=checkbox]) {
-    outline: 1px solid #26b050;
+    outline: 1px solid var(--success-color);
 }
 
 .invalid {
-    outline: 1px solid red;
+    outline: 1px solid var(--error-color);
 }
 
 .validation-message {
-    color: red;
+    color: var(--error-color);
 }
 
 #blazor-error-ui {
@@ -74,4 +87,229 @@
 
 code {
     color: #c02d76;
+}
+
+/* Terminal Styles */
+body {
+    color: var(--terminal-text);
+    background-color: var(--body-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Courier New', monospace;
+    transition: background-color 0.3s ease;
+}
+
+.terminal {
+    background-color: var(--terminal-bg);
+    color: var(--terminal-text);
+    font-family: 'Courier New', monospace;
+    padding: 20px;
+    width: 700px;
+    height: 500px;
+    overflow-y: auto;
+    border-radius: 10px;
+    border: 2px solid var(--terminal-border);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+}
+
+.terminal-header {
+    font-weight: bold;
+    padding: 8px;
+    border-bottom: 1px solid var(--terminal-border);
+    background-color: var(--terminal-header-bg);
+    color: var(--terminal-header-text);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.terminal-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.terminal-control {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.terminal-control-close {
+    background-color: #ff5f56;
+}
+
+.terminal-control-minimize {
+    background-color: #ffbd2e;
+}
+
+.terminal-control-maximize {
+    background-color: #27c93f;
+}
+
+.terminal-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 10px;
+    line-height: 1.5;
+    margin-bottom: 10px;
+}
+
+    .terminal-body div {
+        margin-bottom: 5px;
+        word-wrap: break-word;
+    }
+
+.terminal-input {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    border-top: 1px solid var(--terminal-border);
+}
+
+    .terminal-input span {
+        margin-right: 5px;
+        font-weight: bold;
+    }
+
+    .terminal-input input {
+        background: none;
+        border: none;
+        color: var(--terminal-text);
+        font-family: 'Courier New', monospace;
+        width: 100%;
+        outline: none;
+        font-size: 16px;
+    }
+
+.terminal-path {
+    color: var(--highlight-color);
+    font-weight: bold;
+}
+
+.terminal-command {
+    color: var(--terminal-text);
+    font-weight: bold;
+}
+
+.terminal-output {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.terminal-error {
+    color: var(--error-color);
+}
+
+.terminal-success {
+    color: var(--success-color);
+}
+
+.terminal-link {
+    color: var(--link-color);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.terminal-animation {
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Contact Form Styles */
+.contact-form {
+    background-color: var(--terminal-bg);
+    border: 1px solid var(--terminal-border);
+    border-radius: 5px;
+    padding: 15px;
+    margin-top: 10px;
+}
+
+    .contact-form h3 {
+        color: var(--terminal-text);
+        margin-top: 0;
+        border-bottom: 1px solid var(--terminal-border);
+        padding-bottom: 5px;
+    }
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+    .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        color: var(--terminal-text);
+    }
+
+.terminal-input-field {
+    width: 100%;
+    padding: 8px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--terminal-border);
+    color: var(--terminal-text);
+    font-family: 'Courier New', monospace;
+    border-radius: 3px;
+}
+
+.terminal-button {
+    background-color: var(--terminal-border);
+    color: var(--terminal-bg);
+    border: none;
+    padding: 8px 15px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+    .terminal-button:hover {
+        background-color: var(--terminal-text);
+    }
+
+.success-message {
+    color: var(--success-color);
+    padding: 10px;
+    border: 1px solid var(--success-color);
+    border-radius: 3px;
+    margin-bottom: 15px;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .terminal {
+        width: 90%;
+        height: 80vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .terminal {
+        width: 95%;
+        height: 85vh;
+        padding: 10px;
+    }
+
+    .terminal-header {
+        padding: 5px;
+    }
 }
