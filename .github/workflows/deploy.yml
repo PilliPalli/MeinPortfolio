@@ -1,0 +1,29 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Deployment startet bei Änderungen auf main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Repository auschecken
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: .NET installieren
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'  # Passende Version wählen
+
+      - name: Blazor WebAssembly veröffentlichen
+        run: dotnet publish MeinPortfolio/MeinPortfolio/MeinPortfolio.csproj -c Release --output dist
+
+      - name: Deployment zu gh-pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: dist/wwwroot  # Nur wwwroot wird veröffentlicht
