@@ -95,7 +95,7 @@ function startMatrixAnimation() {
 
 async function downloadResume() {
     try {
-        const response = await fetch('https://pillipalli.github.io/resume.pdf', { cache: 'no-store' });
+        const response = await fetch('https://pillipalli.github.io/resumes/resume.pdf', { cache: 'no-store' });
         if (!response.ok) throw new Error(`Fehler beim Abrufen der Datei: ${response.status}`);
 
         const blob = await response.blob();
