@@ -95,15 +95,15 @@ function startMatrixAnimation() {
 
 async function downloadResume() {
     try {
-        const response = await fetch('/resumes/resume.pdf', { cache: 'no-store' });
-        if (!response.ok) throw new Error('Fehler beim Abrufen der Datei');
+        const response = await fetch('https://pillipalli.github.io/resume.pdf', { cache: 'no-store' });
+        if (!response.ok) throw new Error(`Fehler beim Abrufen der Datei: ${response.status}`);
 
         const blob = await response.blob();
         const url = window.URL.createObjectURL(blob);
 
         const a = document.createElement("a");
         a.href = url;
-        a.download = "Mein_Resume.pdf";
+        a.download = "Mein_Resume.pdf"; // Erzwingt den Download
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
