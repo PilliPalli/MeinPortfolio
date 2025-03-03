@@ -68,7 +68,7 @@ namespace MeinPortfolio.Pages
             CommandService.RegisterCommand(new ThemeCommand(ThemeService));
 
             // Easter egg commands
-            CommandService.RegisterCommand(new MatrixCommand());
+           
             CommandService.RegisterCommand(new HireMeCommand());
             CommandService.RegisterCommand(new AsciiArtCommand());
 
@@ -78,8 +78,7 @@ namespace MeinPortfolio.Pages
             // GitHub command
             CommandService.RegisterCommand(new GitHubCommand(HttpClientFactory.CreateClient()));
 
-            // Custom commands
-            CommandService.RegisterCommand(new ContactCommand(this));
+            
         }
 
 

@@ -233,67 +233,6 @@ body {
     }
 }
 
-/* Contact Form Styles */
-.contact-form {
-    background-color: var(--terminal-bg);
-    border: 1px solid var(--terminal-border);
-    border-radius: 5px;
-    padding: 15px;
-    margin-top: 10px;
-}
-
-    .contact-form h3 {
-        color: var(--terminal-text);
-        margin-top: 0;
-        border-bottom: 1px solid var(--terminal-border);
-        padding-bottom: 5px;
-    }
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-    .form-group label {
-        display: block;
-        margin-bottom: 5px;
-        color: var(--terminal-text);
-    }
-
-.terminal-input-field {
-    width: 100%;
-    padding: 8px;
-    background-color: rgba(0, 0, 0, 0.3);
-    border: 1px solid var(--terminal-border);
-    color: var(--terminal-text);
-    font-family: 'Courier New', monospace;
-    border-radius: 3px;
-}
-
-.terminal-button {
-    background-color: var(--terminal-border);
-    color: var(--terminal-bg);
-    border: none;
-    padding: 8px 15px;
-    border-radius: 3px;
-    cursor: pointer;
-    font-family: 'Courier New', monospace;
-    font-weight: bold;
-    transition: all 0.2s ease;
-}
-
-    .terminal-button:hover {
-        background-color: var(--terminal-text);
-    }
-
-.success-message {
-    color: var(--success-color);
-    padding: 10px;
-    border: 1px solid var(--success-color);
-    border-radius: 3px;
-    margin-bottom: 15px;
-}
-
-
 /* Responsive Design */
 @media (max-width: 768px) {
     .terminal {
