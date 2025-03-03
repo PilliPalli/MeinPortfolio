@@ -46,53 +46,6 @@ function applyTheme(theme) {
     }
 }
 
-// Matrix animation
-function startMatrixAnimation() {
-    const canvas = document.createElement('canvas');
-    const terminal = document.querySelector('.terminal-body');
-    terminal.innerHTML = '';
-    terminal.appendChild(canvas);
-    
-    canvas.width = terminal.offsetWidth;
-    canvas.height = terminal.offsetHeight;
-    
-    const ctx = canvas.getContext('2d');
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789$+-*/=%"\'#&_(),.;:?!\\|{}<>[]^~';
-    const columns = Math.floor(canvas.width / 20);
-    const drops = [];
-    
-    for (let i = 0; i < columns; i++) {
-        drops[i] = 1;
-    }
-    
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    
-    ctx.fillStyle = '#0f0';
-    ctx.font = '15px monospace';
-    
-    function draw() {
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
-        ctx.fillStyle = '#0f0';
-        ctx.font = '15px monospace';
-        
-        for (let i = 0; i < drops.length; i++) {
-            const text = characters.charAt(Math.floor(Math.random() * characters.length));
-            ctx.fillText(text, i * 20, drops[i] * 20);
-            
-            if (drops[i] * 20 > canvas.height && Math.random() > 0.975) {
-                drops[i] = 0;
-            }
-            
-            drops[i]++;
-        }
-    }
-    
-    return setInterval(draw, 33);
-}
-
 async function downloadResume() {
     try {
         const response = await fetch('https://pillipalli.github.io/MeinPortfolio/resumes/resume.pdf', { cache: 'no-store' });
@@ -163,24 +116,5 @@ window.animateText = function(text, elementId, speed = 50) {
             }
         }, speed);
     });
-};
-
-// Matrix animation control
-let matrixInterval = null;
-
-window.startMatrix = function() {
-    if (matrixInterval) {
-        clearInterval(matrixInterval);
-    }
-    matrixInterval = startMatrixAnimation();
-    return true;
-};
-
-window.stopMatrix = function() {
-    if (matrixInterval) {
-        clearInterval(matrixInterval);
-        matrixInterval = null;
-    }
-    return true;
 };
 
