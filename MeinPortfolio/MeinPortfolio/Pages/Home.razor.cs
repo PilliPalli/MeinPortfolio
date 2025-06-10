@@ -66,10 +66,7 @@ namespace MeinPortfolio.Pages
             // Theme commands
             CommandService.RegisterCommand(new ThemeCommand(ThemeService));
 
-            // Easter egg commands
-           
-            CommandService.RegisterCommand(new HireMeCommand());
-            CommandService.RegisterCommand(new AsciiArtCommand());
+
 
             // Resume command
             CommandService.RegisterCommand(new ResumeCommand(JSRuntime));
@@ -115,7 +112,12 @@ namespace MeinPortfolio.Pages
     "cd",
     "about_me",
     "skills",
-
+    "resume",
+    "theme",
+    "date",
+    "echo",
+    "pwd",
+    "back"
 };
 
         private string GetAutoCompleteSuggestion(string currentInput)
@@ -192,13 +194,7 @@ namespace MeinPortfolio.Pages
         {
             StateHasChanged();
         }
-
-        public void ShowContactForm(bool show)
-        {
-            showContactForm = show;
-            StateHasChanged();
-        }
-
+        
         public void Dispose()
         {
             // Unsubscribe from events
