@@ -4,7 +4,6 @@ using Microsoft.JSInterop;
 using MeinPortfolio.Models;
 using MeinPortfolio.Models.Commands;
 using MeinPortfolio.Services;
-using System.Net.Http;
 
 namespace MeinPortfolio.Pages
 {
@@ -14,7 +13,7 @@ namespace MeinPortfolio.Pages
         [Inject] private CommandService CommandService { get; set; }
         [Inject] private NavigationService NavigationService { get; set; }
         [Inject] private ThemeService ThemeService { get; set; }
-        [Inject] private IHttpClientFactory HttpClientFactory { get; set; }
+
 
         private List<OutputLine> output = new();
         private string input = "";
@@ -75,8 +74,7 @@ namespace MeinPortfolio.Pages
             // Resume command
             CommandService.RegisterCommand(new ResumeCommand(JSRuntime));
 
-            // GitHub command
-            CommandService.RegisterCommand(new GitHubCommand(HttpClientFactory.CreateClient()));
+
 
             
         }
@@ -117,7 +115,7 @@ namespace MeinPortfolio.Pages
     "cd",
     "about_me",
     "skills",
-    "github"
+
 };
 
         private string GetAutoCompleteSuggestion(string currentInput)

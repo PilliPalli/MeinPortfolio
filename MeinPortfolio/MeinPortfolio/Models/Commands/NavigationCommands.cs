@@ -107,7 +107,30 @@ namespace MeinPortfolio.Models.Commands
             {
                 NavigationSection.Home => Task.FromResult("about_me   projects   skills   contact_me"),
                 NavigationSection.About => Task.FromResult("Name: Dein Name\nBeruf: Softwareentwickler\nSkills: C#, Blazor, Dapper, SQL\nErfahrung: 3 Jahre Softwareentwicklung"),
-                NavigationSection.Projects => Task.FromResult("- Schwimmbad-Mitgliedschaftsverwaltung (C#, SQLite, WPF)\n- Garbage-Collection-Tool mit WPF\n- Kundenverwaltung für Oldtimer-Vermietung (Blazor Server)"),
+                NavigationSection.Projects => Task.FromResult(@"My Projects:
+
+- Portfolio
+  Description: Interactive terminal-based portfolio website
+  Language: C#
+  Stars: 5
+  URL: https://github.com/deinname/Portfolio
+
+- WPF-MembershipManager
+  Description: Membership management system for swimming pools
+  Language: C#
+  Stars: 3
+  URL: https://github.com/deinname/WPF-MembershipManager
+
+- GarbageCollectionTool
+  Description: Tool for managing garbage collection schedules
+  Language: C#
+  Stars: 2
+  URL: https://github.com/deinname/GarbageCollectionTool
+
+Developer Profile: Dein Name
+Bio: Software Developer specializing in C# and Blazor
+Location: Germany
+Public Repositories: 10"),
                 NavigationSection.Contact => Task.FromResult("Email: deine-email@example.com\nLinkedIn: linkedin.com/in/deinname\nGitHub: github.com/deinname"),
                 NavigationSection.Skills => Task.FromResult("- C# (5/5)\n- Blazor (4/5)\n- SQL & Dapper (4/5)\n- ASP.NET Core (4/5)\n- Git & CI/CD (4/5)"),
                 _ => Task.FromResult("Unknown section")
