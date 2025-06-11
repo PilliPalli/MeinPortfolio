@@ -68,7 +68,6 @@ async function downloadResume() {
 
 
 
-// Load jsPDF library dynamically
 function loadJsPDF() {
     return new Promise((resolve, reject) => {
         if (window.jspdf) {
