@@ -9,15 +9,6 @@ namespace MeinPortfolio.Models
         public virtual string Usage => Name;
 
         public abstract Task<string> ExecuteAsync(string[] args);
-
-        protected string FormatError(string message)
-        {
-            return $"Error: {message}";
-        }
-
-        protected string FormatUsage()
-        {
-            return $"Usage: {Usage}";
-        }
+        
     }
 }

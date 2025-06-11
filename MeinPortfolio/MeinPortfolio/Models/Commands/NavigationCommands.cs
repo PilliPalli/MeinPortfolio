@@ -106,32 +106,26 @@ namespace MeinPortfolio.Models.Commands
             return section switch
             {
                 NavigationSection.Home => Task.FromResult("about_me   projects   skills   contact_me"),
-                NavigationSection.About => Task.FromResult("Name: Dein Name\nBeruf: Softwareentwickler\nSkills: C#, Blazor, Dapper, SQL\nErfahrung: 3 Jahre Softwareentwicklung"),
-                NavigationSection.Projects => Task.FromResult(@"My Projects:
+                NavigationSection.About => Task.FromResult("Name: Moritz Nicola Kreis\nAbschluss: staatlich geprüfter Wirtschaftsinformatiker\nSkills: C#, Blazor, Git, SQL\nErfahrung: Berufseinsteiger"),
+                NavigationSection.Projects => Task.FromResult(@"Meine Projekte:
 
 - Portfolio
-  Description: Interactive terminal-based portfolio website
-  Language: C#
-  Stars: 5
-  URL: https://github.com/deinname/Portfolio
+  Beschreibung: Interaktive Portfolio-Website im Terminal-Stil
+  Sprache/Framework: C#, Blazor WebAssembly
 
-- WPF-MembershipManager
-  Description: Membership management system for swimming pools
-  Language: C#
-  Stars: 3
-  URL: https://github.com/deinname/WPF-MembershipManager
+-Schwimmbad-Mitgliedschaftsverwaltung
+  Beschreibung: Eine Mitgliederverwaltung für ein fiktives Schwimmbad mit MSSQL-DB-Anbindung 
+  Sprache/Framework: C#, WPF
 
 - GarbageCollectionTool
-  Description: Tool for managing garbage collection schedules
-  Language: C#
-  Stars: 2
-  URL: https://github.com/deinname/GarbageCollectionTool
+  Description: Entwicklung eines GarbageCollectionTools zur Löschung temporärer Dateien inklusive Scheduler, DB-Anbindung und Benutzerverwaltung mit Login-System
+  Sprache/Framework: C#, WPF
 
-Developer Profile: Dein Name
-Bio: Software Developer specializing in C# and Blazor
-Location: Germany
-Public Repositories: 10"),
-                NavigationSection.Contact => Task.FromResult("Email: deine-email@example.com\nLinkedIn: linkedin.com/in/deinname\nGitHub: github.com/deinname"),
+- Code-Kommentierungstool
+  Beschreibung: Ein Programm, mit welchem Code-Dateien oder kopierter Code eingefügt werden kann, welcher mittels ChatGPT-API den Code automatisch kommentiert, einstellbar nach Detailgrad
+  Sprache/Framework: C#, WPF
+"),
+                NavigationSection.Contact => Task.FromResult("Email: moritz.nicola.kreis@web.de"),
                 NavigationSection.Skills => Task.FromResult("- C# (5/5)\n- Blazor (4/5)\n- SQL & Dapper (4/5)\n- ASP.NET Core (4/5)\n- Git & CI/CD (4/5)"),
                 _ => Task.FromResult("Unknown section")
             };

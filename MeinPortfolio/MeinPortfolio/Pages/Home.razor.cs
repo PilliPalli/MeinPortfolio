@@ -33,7 +33,7 @@ namespace MeinPortfolio.Pages
             NavigationService.OnNavigate += HandleNavigate;
 
             // Add welcome message
-            output.Add(new OutputLine("Welcome to your interactive Terminal Portfolio. Type 'help' for available commands."));
+            output.Add(new OutputLine("Welcome to the interactive Terminal Portfolio of Moritz Kreis. Type 'help' for available commands."));
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -144,7 +144,7 @@ namespace MeinPortfolio.Pages
             if (result.Output == "clear")
             {
                 output.Clear();
-                output.Add(new OutputLine("Welcome to your interactive Terminal Portfolio. Type 'help' for available commands."));
+                output.Add(new OutputLine("Welcome to the interactive Terminal Portfolio of Moritz Kreis. Type 'help' for available commands."));
                 input = "";
                 StateHasChanged();
                 return;
@@ -156,11 +156,6 @@ namespace MeinPortfolio.Pages
                 if (result.IsHtml)
                 {
                     output.Add(new OutputLine(result.Output, isHtml: true));
-                }
-                else if (result.IsAnimation)
-                {
-                    
-                    await JSRuntime.InvokeVoidAsync("startMatrix");
                 }
                 else
                 {

@@ -52,7 +52,7 @@ namespace MeinPortfolio.Models.Commands
 
         public override Task<string> ExecuteAsync(string[] args)
         {
-            return Task.FromResult("Name: Dein Name\nBeruf: Softwareentwickler\nSkills: C#, Blazor, Dapper, SQL\nErfahrung: 3 Jahre Softwareentwicklung");
+            return Task.FromResult("Name: Moritz Nicola Kreis\n");
         }
     }
 }

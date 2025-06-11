@@ -15,8 +15,7 @@ public class Program
 
         builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
         builder.Services.AddHttpClient();
-
-        // Register services
+        
         builder.Services.AddSingleton<CommandService>();
         builder.Services.AddSingleton<NavigationService>();
         builder.Services.AddScoped<ThemeService>();

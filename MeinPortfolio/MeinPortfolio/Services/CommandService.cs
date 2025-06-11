@@ -16,15 +16,6 @@ namespace MeinPortfolio.Services
         {
             _commands[command.Name.ToLower()] = command;
         }
-
-        public void RegisterCommands(IEnumerable<ICommand> commands)
-        {
-            foreach (var command in commands)
-            {
-                RegisterCommand(command);
-            }
-        }
-
         public async Task<CommandResult> ExecuteCommandAsync(string input)
         {
             if (string.IsNullOrWhiteSpace(input))
