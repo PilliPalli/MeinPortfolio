@@ -1,12 +1,10 @@
-﻿@page "/"
-@using MeinPortfolio.Services
-@using MeinPortfolio.Models
+@page "/terminal"
 
+<PageTitle>Terminal Portfolio</PageTitle>
 
 <div class="terminal">
     <div class="terminal-header">
         <div>Terminal Portfolio - @NavigationService.GetSectionPath()</div>
-
     </div>
     <div class="terminal-body" id="terminal-body">
         @foreach (var line in output)
@@ -20,9 +18,6 @@
                 <div>@line.Content</div>
             }
         }
-
-
-
     </div>
     <div class="terminal-input">
         <span>$ </span>

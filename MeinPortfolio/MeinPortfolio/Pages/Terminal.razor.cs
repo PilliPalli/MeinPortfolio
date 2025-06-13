@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
 using MeinPortfolio.Models;
@@ -7,13 +7,14 @@ using MeinPortfolio.Services;
 
 namespace MeinPortfolio.Pages
 {
-    public partial class Home : IDisposable
+    public partial class Terminal : IDisposable
     {
         [Inject] private IJSRuntime JSRuntime { get; set; }
         [Inject] private CommandService CommandService { get; set; }
         [Inject] private NavigationService NavigationService { get; set; }
         [Inject] private ThemeService ThemeService { get; set; }
-
+        [Inject] private AuthService AuthService { get; set; }
+        [Inject] private NavigationManager NavigationManager { get; set; }
 
         private List<OutputLine> output = new();
         private string input = "";
@@ -22,17 +23,21 @@ namespace MeinPortfolio.Pages
 
         protected override async Task OnInitializedAsync()
         {
-            // Register commands
+            await AuthService.InitializeAsync();
+            
+            if (!AuthService.IsAuthenticated)
+            {
+                NavigationManager.NavigateTo("/");
+                return;
+            }
+
             RegisterCommands();
 
-            // Initialize theme
             await ThemeService.InitializeAsync();
             ThemeService.OnThemeChanged += HandleThemeChanged;
 
-            // Subscribe to navigation events
             NavigationService.OnNavigate += HandleNavigate;
 
-            // Add welcome message
             output.Add(new OutputLine("Welcome to the interactive Terminal Portfolio of Moritz Kreis. Type 'help' for available commands."));
         }
 
@@ -47,36 +52,23 @@ namespace MeinPortfolio.Pages
 
         private void RegisterCommands()
         {
-            // Help command
             CommandService.RegisterCommand(new HelpCommand(CommandService));
 
-            // Navigation commands
             CommandService.RegisterCommand(new CdCommand(NavigationService));
             CommandService.RegisterCommand(new PwdCommand(NavigationService));
             CommandService.RegisterCommand(new LsCommand(NavigationService));
             CommandService.RegisterCommand(new BackCommand(NavigationService));
             CommandService.RegisterCommand(new HomeCommand(NavigationService));
 
-            // System commands
             CommandService.RegisterCommand(new ClearCommand());
             CommandService.RegisterCommand(new EchoCommand());
             CommandService.RegisterCommand(new DateCommand());
             CommandService.RegisterCommand(new WhoamiCommand());
 
-            // Theme commands
             CommandService.RegisterCommand(new ThemeCommand(ThemeService));
 
-
-
-            // Resume command
             CommandService.RegisterCommand(new ResumeCommand(JSRuntime));
-
-
-
-            
         }
-
-
 
         private async Task HandleKeyPress(KeyboardEventArgs e)
         {
@@ -100,25 +92,23 @@ namespace MeinPortfolio.Pages
             }
         }
 
-
         private List<string> commandList = new List<string>
-{
-    "help",
-    "ls",
-    "home",
-    "matrix",
-    "clear",
-    "whoami",
-    "cd",
-    "about_me",
-    "skills",
-    "resume",
-    "theme",
-    "date",
-    "echo",
-    "pwd",
-    "back"
-};
+        {
+            "help",
+            "ls",
+            "home",
+            "clear",
+            "whoami",
+            "cd",
+            "about_me",
+            "skills",
+            "resume",
+            "theme",
+            "date",
+            "echo",
+            "pwd",
+            "back"
+        };
 
         private string GetAutoCompleteSuggestion(string currentInput)
         {
@@ -129,8 +119,6 @@ namespace MeinPortfolio.Pages
 
             return suggestion ?? currentInput;
         }
-
-
 
         private async Task ExecuteCommandAsync()
         {
@@ -149,7 +137,6 @@ namespace MeinPortfolio.Pages
                 StateHasChanged();
                 return;
             }
-
 
             if (!string.IsNullOrEmpty(result.Output))
             {
@@ -170,10 +157,8 @@ namespace MeinPortfolio.Pages
             await FocusInputAsync();
             StateHasChanged();
 
-            // Scroll to bottom
             await JSRuntime.InvokeVoidAsync("eval", "document.getElementById('terminal-body').scrollTop = document.getElementById('terminal-body').scrollHeight");
         }
-
 
         private async Task FocusInputAsync()
         {
@@ -192,7 +177,6 @@ namespace MeinPortfolio.Pages
         
         public void Dispose()
         {
-            // Unsubscribe from events
             ThemeService.OnThemeChanged -= HandleThemeChanged;
             NavigationService.OnNavigate -= HandleNavigate;
         }

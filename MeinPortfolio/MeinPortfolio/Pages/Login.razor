@@ -1,0 +1,133 @@
+@page "/"
+@using MeinPortfolio.Services
+@inject AuthService AuthService
+@inject NavigationManager Navigation
+
+<PageTitle>Portfolio Login</PageTitle>
+
+<div class="login-container">
+    <div class="login-terminal">
+        <div class="terminal-header">
+            <div>Portfolio Access - Authentication Required</div>
+        </div>
+        <div class="login-body">
+            <div class="login-welcome">
+                <pre>
+ ____            _    __       _ _       
+|  _ \ ___  _ __| |_ / _| ___ | (_) ___  
+| |_) / _ \| '__| __| |_ / _ \| | |/ _ \ 
+|  __/ (_) | |  | |_|  _| (_) | | | (_) |
+|_|   \___/|_|   \__|_|  \___/|_|_|\___/ 
+                                        
+Welcome to the Terminal Portfolio
+                </pre>
+                <p>Please enter the access password to continue:</p>
+            </div>
+            
+            <div class="login-form">
+                <div class="terminal-input">
+                    <span>password: </span>
+                    <input 
+                        type="password"
+                        placeholder="Enter password..."
+                        @bind="password"
+                        @oninput="OnInputChanged"
+                        @onkeydown="HandleKeyDown"
+                        @ref="passwordInput"
+                        autofocus />
+                </div>
+                
+                @if (!string.IsNullOrEmpty(errorMessage))
+                {
+                    <div class="login-error">
+                        ❌ @errorMessage
+                    </div>
+                }
+
+                @if (isLoading)
+                {
+                    <div class="login-loading">
+                        🔐 Authenticating...
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private string password = "";
+    private string errorMessage = "";
+    private bool isLoading = false;
+    private ElementReference passwordInput;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await AuthService.InitializeAsync();
+        if (AuthService.IsAuthenticated)
+        {
+            Navigation.NavigateTo("/terminal");
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await passwordInput.FocusAsync();
+        }
+    }
+
+    private void OnInputChanged(ChangeEventArgs e)
+    {
+        password = e.Value?.ToString() ?? "";
+        errorMessage = ""; 
+    }
+
+    private async Task HandleKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Key == "Enter")
+        {
+            await AttemptLogin();
+        }
+    }
+
+    private async Task AttemptLogin()
+    {
+        if (string.IsNullOrWhiteSpace(password))
+        {
+            errorMessage = "Please enter a password.";
+            return;
+        }
+
+        isLoading = true;
+        errorMessage = "";
+        StateHasChanged();
+
+        try
+        {
+            var success = await AuthService.LoginAsync(password);
+            
+            if (success)
+            {
+                Navigation.NavigateTo("/terminal");
+            }
+            else
+            {
+                errorMessage = "Invalid password. Access denied.";
+                password = "";
+                await passwordInput.FocusAsync();
+            }
+        }
+        catch
+        {
+            errorMessage = "Authentication error occurred. Please try again.";
+            password = "";
+        }
+        finally
+        {
+            isLoading = false;
+            StateHasChanged();
+        }
+    }
+}
