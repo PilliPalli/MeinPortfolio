@@ -78,7 +78,7 @@ namespace MeinPortfolio.Models.Commands
 
         public override Task<string> ExecuteAsync(string[] args)
         {
-            return Task.FromResult("Name: Moritz Nicola Kreis\n");
+            return Task.FromResult("Moritz Nicola Kreis\n");
         }
     }
 }
