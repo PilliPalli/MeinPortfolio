@@ -1,50 +1,16 @@
 // Theme management
-function applyTheme(theme) {
+function applyTheme(theme, colors) {
     const root = document.documentElement;
-    
-    switch (theme) {
-        case 'Dark':
-            root.style.setProperty('--terminal-bg', '#121212');
-            root.style.setProperty('--terminal-text', '#33ff33');
-            root.style.setProperty('--terminal-border', '#33ff33');
-            root.style.setProperty('--terminal-header-bg', '#121212');
-            root.style.setProperty('--terminal-header-text', '#33ff33');
-            root.style.setProperty('--body-bg', '#121212');
-            break;
-        case 'Light':
-            root.style.setProperty('--terminal-bg', '#f0f0f0');
-            root.style.setProperty('--terminal-text', '#121212');
-            root.style.setProperty('--terminal-border', '#121212');
-            root.style.setProperty('--terminal-header-bg', '#e0e0e0');
-            root.style.setProperty('--terminal-header-text', '#121212');
-            root.style.setProperty('--body-bg', '#f0f0f0');
-            break;
-        case 'Hacker':
-            root.style.setProperty('--terminal-bg', '#000000');
-            root.style.setProperty('--terminal-text', '#00ff00');
-            root.style.setProperty('--terminal-border', '#00ff00');
-            root.style.setProperty('--terminal-header-bg', '#000000');
-            root.style.setProperty('--terminal-header-text', '#00ff00');
-            root.style.setProperty('--body-bg', '#000000');
-            break;
-        case 'Retro':
-            root.style.setProperty('--terminal-bg', '#2b2b2b');
-            root.style.setProperty('--terminal-text', '#ff8c00');
-            root.style.setProperty('--terminal-border', '#ff8c00');
-            root.style.setProperty('--terminal-header-bg', '#2b2b2b');
-            root.style.setProperty('--terminal-header-text', '#ff8c00');
-            root.style.setProperty('--body-bg', '#2b2b2b');
-            break;
-        case 'Cyberpunk':
-            root.style.setProperty('--terminal-bg', '#272932');
-            root.style.setProperty('--terminal-text', '#CB1DCD');
-            root.style.setProperty('--terminal-border', '#37EBF3');
-            root.style.setProperty('--terminal-header-bg', '#272932');
-            root.style.setProperty('--terminal-header-text', '#00D0DB');
-            root.style.setProperty('--body-bg', '#272932');
-            break;
-    }
+
+    root.style.setProperty('--terminal-bg', colors.bg);
+    root.style.setProperty('--terminal-text', colors.text);
+    root.style.setProperty('--terminal-border', colors.border);
+
+    root.style.setProperty('--terminal-header-bg', colors.bg);
+    root.style.setProperty('--terminal-header-text', colors.text);
+    root.style.setProperty('--body-bg', colors.bg);
 }
+
 
 async function downloadResume() {
     try {
