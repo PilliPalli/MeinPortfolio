@@ -29,26 +29,26 @@ namespace MeinPortfolio.Models.Commands
             {
                 case "dark":
                     await _themeService.SetThemeAsync(ThemeType.Dark);
-                    return "Theme changed to Dark.";
+                    return "Theme changed to dark.";
                 
                 case "light":
                     await _themeService.SetThemeAsync(ThemeType.Light);
-                    return "Theme changed to Light.";
+                    return "Theme changed to light.";
                 
                 case "hacker":
                     await _themeService.SetThemeAsync(ThemeType.Hacker);
-                    return "Theme changed to Hacker.";
+                    return "Theme changed to hacker.";
                 
                 case "retro":
                     await _themeService.SetThemeAsync(ThemeType.Retro);
-                    return "Theme changed to Retro.";
+                    return "Theme changed to retro.";
                 
                 case "cyberpunk":
                     await _themeService.SetThemeAsync(ThemeType.Cyberpunk);
-                    return "Theme changed to Cyberpunk.";
+                    return "Theme changed to cyberpunk.";
                 
                 default:
-                    return $"Unknown theme: {themeName}. Available themes: dark, light, hacker, retro, custom";
+                    return $"Unknown theme: {themeName}. Available themes: dark, light, hacker, retro, cyberpunk";
             }
         }
     }
