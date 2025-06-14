@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Redirecting...</title>
+    <script>
+        // Speichere den ursprünglichen Pfad
+        sessionStorage.redirect = location.pathname;
+        // Weiterleitung zur Hauptseite
+        location.replace('/');
+    </script>
+</head>
+<body>
+<h1>Redirecting...</h1>
+<a href="/">Click here if not redirected</a>
+</body>
+</html>
