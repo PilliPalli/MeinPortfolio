@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MeinPortfolio</title>
     <link rel="icon" type="image/x-icon" href="images/favicon.png" />
-    <base href="/MeinPortfolio" />
+    <base href="/" />
     <link rel="stylesheet" href="css/app.css" />
     <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
 
@@ -15,6 +15,13 @@
 </head>
 
 <body>
+<script>
+    if (sessionStorage.redirect) {
+        const redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        window.history.replaceState({}, '', redirect);
+    }
+</script>
     <div id="app">
         <svg class="loading-progress">
             <circle r="40%" cx="50%" cy="50%" />
