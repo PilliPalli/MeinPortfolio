@@ -72,7 +72,6 @@ namespace MeinPortfolio.Services
                     break;
                 case ThemeType.Cyberpunk:
                     bg = "#272932"; text = "#CB1DCD"; border = "#37EBF3";
-
                     break;
                 default:
                     return;
