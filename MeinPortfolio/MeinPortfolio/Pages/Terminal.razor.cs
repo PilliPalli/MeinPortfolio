@@ -68,7 +68,7 @@ namespace MeinPortfolio.Pages
 
 
             CommandService.RegisterCommand(new ThemeCommand(ThemeService));
-            CommandService.RegisterCommand(new ResumeCommand(JSRuntime));
+            CommandService.RegisterCommand(new CvCommand(JSRuntime));
         }
 
         private async Task HandleKeyPress(KeyboardEventArgs e)
@@ -102,8 +102,7 @@ namespace MeinPortfolio.Pages
             "whoami",
             "cd",
             "about_me",
-            "skills",
-            "resume",
+            "cv",
             "theme",
             "date",
             "echo",

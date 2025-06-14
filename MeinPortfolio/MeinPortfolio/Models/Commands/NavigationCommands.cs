@@ -41,10 +41,6 @@ namespace MeinPortfolio.Models.Commands
                     _navigationService.NavigateTo(NavigationSection.Contact);
                     return Task.FromResult($"Navigated to Contact section.");
                 
-                case "skills":
-                    _navigationService.NavigateTo(NavigationSection.Skills);
-                    return Task.FromResult($"Navigated to Skills section.");
-                
                 case "~":
                 case "home":
                     _navigationService.GoHome();
@@ -62,7 +58,7 @@ namespace MeinPortfolio.Models.Commands
                     }
                 
                 default:
-                    return Task.FromResult($"Section '{section}' not found. Available sections: about, projects, contact, skills, home");
+                    return Task.FromResult($"Section '{section}' not found. Available sections: about, projects, contact, home");
             }
         }
     }
@@ -91,7 +87,7 @@ namespace MeinPortfolio.Models.Commands
         private readonly NavigationService _navigationService;
 
         public override string Name => "ls";
-        public override string Description => "List available commands or sections";
+        public override string Description => "List sections in home or show content of the current section";
         public override string Usage => "ls";
 
         public LsCommand(NavigationService navigationService)
@@ -105,30 +101,40 @@ namespace MeinPortfolio.Models.Commands
             
             return section switch
             {
-                NavigationSection.Home => Task.FromResult("about_me   projects   skills   contact_me"),
-                NavigationSection.About => Task.FromResult("Name: Moritz Nicola Kreis\nAbschluss: staatlich geprüfter Wirtschaftsinformatiker\nSkills: C#, Blazor, Git, SQL\nErfahrung: Berufseinsteiger"),
+                NavigationSection.Home => Task.FromResult("about_me   projects   contact_me"),
+
+                NavigationSection.About => Task.FromResult(
+                    "Name: Moritz Nicola Kreis\n" +
+                    "Alter: 22 Jahre alt\n" +
+                    "Abschluss: Staatlich geprüfter Wirtschaftsinformatiker\n" +
+                    "Erfahrung: Berufseinsteiger\n" +
+                    "Kenntnisse: C#, Blazor, Git, SQL\n" +
+                    "Hobbys: Fitnessstudio, Freunde treffen"),
+                
                 NavigationSection.Projects => Task.FromResult(@"Meine Projekte:
 
-- Portfolio
-  Beschreibung: Interaktive Portfolio-Website im Terminal-Stil
-  Sprache/Framework: C#, Blazor WebAssembly
+                    - Portfolio
+                      Beschreibung: Interaktive Portfolio-Website im Terminal-Stil mit Informationen über mich
+                      Technologie: C#, Blazor WebAssembly
 
--Schwimmbad-Mitgliedschaftsverwaltung
-  Beschreibung: Eine Mitgliederverwaltung für ein fiktives Schwimmbad mit MSSQL-DB-Anbindung 
-  Sprache/Framework: C#, WPF
+                    - Schwimmbad-Verwaltung
+                      Beschreibung: Anwendung zur Mitgliederverwaltung eines fiktiven Schwimmbads mit MSSQL-Anbindung
+                      Technologie: C#, WPF
 
-- GarbageCollectionTool
-  Description: Entwicklung eines GarbageCollectionTools zur Löschung temporärer Dateien inklusive Scheduler, DB-Anbindung und Benutzerverwaltung mit Login-System
-  Sprache/Framework: C#, WPF
+                    - Garbage Collection Tool
+                      Beschreibung: Tool zur automatischen Löschung temporärer Dateien mit Scheduler, Login-System und DB-Anbindung
+                      Technologie: C#, WPF
 
-- Code-Kommentierungstool
-  Beschreibung: Ein Programm, mit welchem Code-Dateien oder kopierter Code eingefügt werden kann, welcher mittels ChatGPT-API den Code automatisch kommentiert, einstellbar nach Detailgrad
-  Sprache/Framework: C#, WPF
-"),
-                NavigationSection.Contact => Task.FromResult("Email: moritz.nicola.kreis@web.de"),
-                NavigationSection.Skills => Task.FromResult("- C# (5/5)\n- Blazor (4/5)\n- SQL & Dapper (4/5)\n- ASP.NET Core (4/5)\n- Git & CI/CD (4/5)"),
+                    - Code-Kommentierungstool
+                      Beschreibung: Tool zur automatischen Kommentierung von Code mittels ChatGPT-API, einstellbar nach Detailgrad
+                      Technologie: C#, WPF
+                    "),
+
+                NavigationSection.Contact => Task.FromResult("Email: moritz.nicola.kreis@gmail.com"),
+
                 _ => Task.FromResult("Unknown section")
             };
+
         }
     }
 

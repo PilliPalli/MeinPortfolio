@@ -62,7 +62,7 @@ namespace MeinPortfolio.Services
                 {
                     var payload = new
                     {
-                        content = $"🔐 Successful login to Moritz Kreis Portfolio at {DateTime.UtcNow:yyyy-MM-dd HH:mm:ss} UTC"
+                        content = $"🔐 Successful login to Moritz Kreis Portfolio at {DateTime.Now:dd-MM-yyy HH:mm:ss} UTC"
                     };
 
                     var json = JsonSerializer.Serialize(payload);

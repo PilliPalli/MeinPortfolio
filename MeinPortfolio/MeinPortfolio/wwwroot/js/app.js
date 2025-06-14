@@ -12,9 +12,9 @@ function applyTheme(theme, colors) {
 }
 
 
-async function downloadResume() {
+async function downloadCv() {
     try {
-        const response = await fetch('resumes/resume.pdf', { cache: 'no-store' });
+        const response = await fetch('cv/cv.pdf', { cache: 'no-store' });
         if (!response.ok) throw new Error(`Fehler beim Abrufen der Datei: ${response.status}`);
 
         const blob = await response.blob();
@@ -22,13 +22,13 @@ async function downloadResume() {
 
         const a = document.createElement("a");
         a.href = url;
-        a.download = "Mein_Resume.pdf"; // Erzwingt den Download
+        a.download = "My_CV.pdf"; 
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
         window.URL.revokeObjectURL(url);
     } catch (error) {
-        console.error("Resume-Download fehlgeschlagen:", error);
+        console.error("CV-Download fehlgeschlagen:", error);
     }
 }
 

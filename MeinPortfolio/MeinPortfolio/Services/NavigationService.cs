@@ -9,7 +9,6 @@ namespace MeinPortfolio.Services
         About,
         Projects,
         Contact,
-        Skills
     }
 
     public class NavigationService
@@ -60,7 +59,6 @@ namespace MeinPortfolio.Services
                 NavigationSection.About => "~/about",
                 NavigationSection.Projects => "~/projects",
                 NavigationSection.Contact => "~/contact",
-                NavigationSection.Skills => "~/skills",
                 _ => "~"
             };
         }
