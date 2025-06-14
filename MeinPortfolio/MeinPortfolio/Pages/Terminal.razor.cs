@@ -64,9 +64,10 @@ namespace MeinPortfolio.Pages
             CommandService.RegisterCommand(new EchoCommand());
             CommandService.RegisterCommand(new DateCommand());
             CommandService.RegisterCommand(new WhoamiCommand());
+            CommandService.RegisterCommand(new LogoutCommand(AuthService.LogoutAsync, NavigationManager));
+
 
             CommandService.RegisterCommand(new ThemeCommand(ThemeService));
-
             CommandService.RegisterCommand(new ResumeCommand(JSRuntime));
         }
 
@@ -107,7 +108,8 @@ namespace MeinPortfolio.Pages
             "date",
             "echo",
             "pwd",
-            "back"
+            "back",
+            "logout"
         };
 
         private string GetAutoCompleteSuggestion(string currentInput)
@@ -157,7 +159,13 @@ namespace MeinPortfolio.Pages
             await FocusInputAsync();
             StateHasChanged();
 
-            await JSRuntime.InvokeVoidAsync("eval", "document.getElementById('terminal-body').scrollTop = document.getElementById('terminal-body').scrollHeight");
+            var isReady = await JSRuntime.InvokeAsync<bool>("eval", "window.terminalReady === true");
+
+            if (isReady)
+            {
+                await JSRuntime.InvokeVoidAsync("scrollTerminalToBottom");
+            }
+
         }
 
         private async Task FocusInputAsync()
@@ -174,6 +182,7 @@ namespace MeinPortfolio.Pages
         {
             StateHasChanged();
         }
+        
         
         public void Dispose()
         {

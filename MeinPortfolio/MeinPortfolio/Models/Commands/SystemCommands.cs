@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components;
 
 namespace MeinPortfolio.Models.Commands
 {
@@ -14,6 +15,31 @@ namespace MeinPortfolio.Models.Commands
         }
 
     }
+    
+    public class LogoutCommand : BaseCommand
+    {
+        private readonly Func<Task> _logoutCallback;
+        private readonly NavigationManager _navigationManager;
+
+        public LogoutCommand(Func<Task> logoutCallback, NavigationManager navigationManager)
+        {
+            _logoutCallback = logoutCallback;
+            _navigationManager = navigationManager;
+        }
+
+        public override string Name => "logout";
+        public override string Description => "Log out of the terminal session";
+        public override string Usage => "logout";
+
+        public override async Task<string> ExecuteAsync(string[] args)
+        {
+            await _logoutCallback();
+            _navigationManager.NavigateTo("/");
+            return "";
+        }
+    }
+
+
 
     public class EchoCommand : BaseCommand
     {
