@@ -84,14 +84,16 @@ function loadJsPDF() {
 }
 
 // Initialize
-window.initTerminal = async function() {
+window.initTerminal = async function () {
     try {
         await loadJsPDF();
+        window.terminalReady = true;
         console.log('Terminal initialized');
     } catch (error) {
         console.error('Error initializing terminal:', error);
     }
 };
+
 
 // Text animation
 window.animateText = function(text, elementId, speed = 50) {
@@ -116,4 +118,12 @@ window.animateText = function(text, elementId, speed = 50) {
         }, speed);
     });
 };
+
+window.scrollTerminalToBottom = function () {
+    const el = document.getElementById('terminal-body');
+    if (el) {
+        el.scrollTop = el.scrollHeight;
+    }
+};
+
 
